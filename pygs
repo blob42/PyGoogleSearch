@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import subprocess
+from optparse import OptionParser
+from urllib import quote
+import sys
+
+__VERSION__ = 0.1
+SEARCH_URL ='''\
+http://www.google.com/search?sclient=psy&hl=en&site=&source=hp&q=foo&btnG=Google+Search\
+'''
+SCRAPY_PARAMS = ['--set', 'FEED_URI=data.json', '--set', 'FEED_FORMAT=json']
+
+
+if __name__ == '__main__':
+    usage = 'usage: %prog query [OPTION...]'
+    op = OptionParser(usage, version='%%prog %s' % __VERSION__)
+    opts, args = op.parse_args()
+    #try:
+    if len(args) != 1:
+        print 'Bad arguments: ' 
+        op.print_usage()
+    else:
+        scrapy = 'scrapy'
+        scrapy_cmd = 'crawl'
+        query = args[0]
+        url_query = quote(query)
+        search = SEARCH_URL.replace('foo', url_query)
+        print url_query
+        print 'Launching scrapy with paramters <%s> <%s>' % (scrapy,
+        search)
+        p = subprocess.Popen([
+                            scrapy, scrapy_cmd, 
+                            search, '--set',
+                            'FEED_URI=data.json',
+                            '--set',
+                            'FEED_FORMAT=JSON'
+                            ],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        output = p.communicate()[0]
+        print output

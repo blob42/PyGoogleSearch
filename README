@@ -1,0 +1,8 @@
+This project is released to the public domain.
+It is based on Scrapy open source screen scrapping.
+contact: spike@boxls.com
+
+PyGoogleSeach is a simple Google Data crawler. I created a simple command line
+interface to make queries, it exports the results in json format to the file
+data.json.
+
