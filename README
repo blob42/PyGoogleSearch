@@ -6,3 +6,7 @@ PyGoogleSeach is a simple Google Data crawler. I created a simple command line
 interface to make queries, it exports the results in json format to the file
 data.json.
 
+USAGE:
+$ ./pygs 'your query'
+
+when the crawler finishes it will output data.json file on the base directory
